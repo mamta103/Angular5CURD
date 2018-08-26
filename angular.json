@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Angular5CURD": {
+    "AngularCrud": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -35,7 +35,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/Angular5CURD",
+            "outputPath": "dist/AngularCrud",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -44,8 +44,9 @@
               "src/favicon.ico",
               "src/assets"
             ],
-            "styles": [ 
+            "styles": [
               "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -73,18 +74,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "Angular5CURD:build"
+            "browserTarget": "AngularCrud:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "Angular5CURD:build:production"
+              "browserTarget": "AngularCrud:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Angular5CURD:build"
+            "browserTarget": "AngularCrud:build"
           }
         },
         "test": {
@@ -118,7 +119,7 @@
         }
       }
     },
-    "Angular5CURD-e2e": {
+    "AngularCrud-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -126,11 +127,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "Angular5CURD:serve"
+            "devServerTarget": "AngularCrud:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "Angular5CURD:serve:production"
+              "devServerTarget": "AngularCrud:serve:production"
             }
           }
         },
@@ -146,5 +147,5 @@
       }
     }
   },
-  "defaultProject": "Angular5CURD"
+  "defaultProject": "AngularCrud"
 }
