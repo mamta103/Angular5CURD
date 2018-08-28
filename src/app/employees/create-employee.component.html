@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css">
-<form #employeeForm="ngForm" (ngSubmit)="saveEmployee(employeeForm)">
+<form #employeeForm="ngForm" ngNativeValidate (ngSubmit)="saveEmployee(employeeForm)">
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h3 class="panel-title">Create Employee</h3>
@@ -8,7 +8,7 @@
         <div class="panel-body">
             <div class="form-group">
                 <label for="fullName">Full Name</label>
-                <input id="fullName" [(ngModel)]="fullName" name="Fullname" type="text" class="form-control" placeholder="Enter your Fullname"
+                <input id="fullName"  required [(ngModel)]="fullName" name="Fullname" type="text" class="form-control" placeholder="Enter your Fullname"
                 />
             </div>
 
@@ -74,12 +74,31 @@
                 </select>
             </div>
 
-            <div class="form-group">
-                <label for="dateOfBirth">Date of Birth</label>
-                <input type="text" [(ngModel)]="dateOfBirth" name="dateOfBirth" class="form-control" bsDatepicker>
 
+            <div class="row">
+                <div class="form-group col-md-5">
+                    <label for="dateOfBirth">Date of Birth</label>
+                    <input type="text" [(ngModel)]="dateOfBirth" [bsConfig]="datePickerConfig" name="dateOfBirth" class="form-control" bsDatepicker
+                        placement="right">
+
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="photoPath">Photo Path</label>
+                <input type="text" class="form-control" id="photoPath" [(ngModel)]="photoPath" name="photoPath">
 
             </div>
+            <div class="form-group">
+                <button class="btn btm-primary" type="button" (click)="togglePhotoPreview()">
+                    {{previewPhoto?"Hide":"Show"}} Preview</button>
+            </div>
+
+            <div class="form-group">
+                <img [src]="photoPath" height="200" width="200" *ngIf="previewPhoto" />
+            </div>
+
 
         </div>
 
