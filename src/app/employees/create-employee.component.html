@@ -1,30 +1,36 @@
 <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css">
-<form #employeeForm="ngForm" ngNativeValidate (ngSubmit)="saveEmployee(employeeForm)">
+<form #employeeForm="ngForm" ngNativeValidate (ngSubmit)="saveEmployee(employee)">
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h3 class="panel-title">Create Employee</h3>
         </div>
 
         <div class="panel-body">
-            <div class="form-group" [class.has-error]="fullNameControl.invalid && fullNameControl.touched" [class.has-success]="fullNameControl.valid">
-                <label for="fullName" class="control-label">Full Name</label>
-                <input id="fullName" required [(ngModel)]="fullName" name="Fullname" type="text" class="form-control" placeholder="Enter your Fullname"
-                    #fullNameControl="ngModel" />
-                <span class="help-block" *ngIf="fullNameControl.invalid && fullNameControl.touched" >FullName Required</span>
+            <div class="form-group" [class.has-error]="name.invalid && name.touched" [class.has-success]="name.valid">
+                <label for="name" class="control-label">Name</label>
+                <input id="name" required [(ngModel)]="employee.name" name="name" type="text" class="form-control" placeholder="Enter your Name"
+                    #name="ngModel" />
+                <span class="help-block" *ngIf="name.invalid && name.touched">Name Required</span>
             </div>
 
 
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input id="email" [(ngModel)]="email" name="Email" type="text" class="form-control"  required placeholder="Enter your Email-Id" />
-            </div>
+            <div class="form-group" [class.has-error]="email.invalid && email.touched">
+                <label for="email" class="control-lable">Email</label>
+                <input id="email" required [email]="employee.email!==''" [(ngModel)]="employee.email" name="Email" type="text" class="form-control"
+                    required placeholder="Enter your Email-Id" #email="ngModel" />
+                <span class="help-block" *ngIf="email.errors?.required && email.touched">
+                    Email is required
+                </span>
+                <span class="help-block" *ngIf="email.errors?.email && email.touched">
+                    Email is Invalid
+                </span> </div>
 
             <div class="form-group">
                 <label>Gender</label>
                 <div class="form-control">
                     <label class="radio-inline">
-                        <input type="radio" [(ngModel)]="gender" value="male" name="gender">Male
+                        <input type="radio" [(ngModel)]="employee.gender" value="male" name="gender">Male
                     </label>
 
                     <label class="radio-inline">
@@ -38,7 +44,7 @@
             <div class="form-group">
                 <label for="phoneNumber">Phone Number</label>
                 <div>
-                    <input id="phoneNumber" [(ngModel)]="phoneNumber" name="PhoneNumber" type="number" class="form-control" placeholder="Enter phoneNumber">
+                    <input id="phoneNumber" [(ngModel)]="employee.phoneNumber" name="PhoneNumber" type="number" class="form-control" placeholder="Enter phoneNumber">
                 </div>
 
             </div>
@@ -47,12 +53,12 @@
                 <label>Contact Prefence</label>
                 <div class="form-control">
                     <label class="radio-inline">
-                        <input type="radio" value="phoneNumber" [(ngModel)]="contactPreference" name="contactPreference">                        PhoneNumber
+                        <input type="radio" value="phoneNumber" [(ngModel)]="employee.contactPreference" name="contactPreference">                        PhoneNumber
                     </label>
 
 
                     <label class="radio-inline">
-                        <input type="radio" value="email" [(ngModel)]="contactPreference" name="contactPreference"> Email
+                        <input type="radio" value="email" [(ngModel)]="employee.contactPreference" name="contactPreference">                        Email
                     </label>
 
                 </div>
@@ -62,14 +68,14 @@
             <div class="form-group">
                 <div class="form-control">
                     <label class="checkbox-inline">
-                        <input type="checkbox" [(ngModel)]="isActive" name="isActive"> IsActive
+                        <input type="checkbox" [(ngModel)]="employee.isActive" name="isActive"> IsActive
                     </label>
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="department">Department</label>
-                <select id="department" name="department" class="form-control" [(ngModel)]="department" name="department">
+                <select id="department" name="department" class="form-control" [(ngModel)]="employee.department" name="department">
                     <option *ngFor="let dept of departments" [value]="dept.id">
                         {{dept.name}}
                     </option>
@@ -81,8 +87,8 @@
             <div class="row">
                 <div class="form-group col-md-5">
                     <label for="dateOfBirth">Date of Birth</label>
-                    <input type="text" [(ngModel)]="dateOfBirth" [bsConfig]="datePickerConfig" name="dateOfBirth" class="form-control" bsDatepicker
-                        placement="right">
+                    <input type="text" [(ngModel)]="employee.dateOfBirth" [bsConfig]="datePickerConfig" name="dateOfBirth" class="form-control"
+                        bsDatepicker placement="right">
 
 
                 </div>
@@ -90,7 +96,7 @@
 
             <div class="form-group">
                 <label for="photoPath">Photo Path</label>
-                <input type="text" class="form-control" id="photoPath" [(ngModel)]="photoPath" name="photoPath">
+                <input type="text" class="form-control" id="photoPath" [(ngModel)]="employee.photoPath" name="photoPath">
 
             </div>
             <div class="form-group">
@@ -112,3 +118,5 @@
 </form>
 
 Angular Generated from Model: {{employeeForm.value |json}}
+<br/>
+<br/> Our Employee Model :{{employee | json}}

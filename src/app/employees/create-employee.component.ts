@@ -14,6 +14,19 @@ export class CreateEmployeeComponent implements OnInit {
   datePickerConfig: Partial<BsDatepickerConfig>;
   dateOfBirth: Date= new Date(2018,11,30);
   
+  employee:Employee= {
+    id:null,
+    name:null,
+    gender: null,
+    contactPreference: null,
+    phoneNumber: null,
+    email: null,
+    dateOfBirth: null,
+    department: null,
+    isActive: null,
+    photoPath: null
+  };
+
   departments: Department[] = [
     { id: 1, name: "HelpDesk" },
     { id: 2, name: "HR" },
@@ -36,8 +49,8 @@ export class CreateEmployeeComponent implements OnInit {
   ngOnInit() {
   }
 
-  saveEmployee(empForm: NgForm): void {
-    console.log(empForm.value);
+  saveEmployee(newEmployee: Employee): void {
+    console.log(newEmployee);
   }
 
 
